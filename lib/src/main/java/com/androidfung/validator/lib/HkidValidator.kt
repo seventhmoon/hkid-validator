@@ -13,8 +13,8 @@ class HkidValidator {
                 (9 - index) * c.toMultiplier()
             }.sum()
 
-            val v = (11 - (sum % 11) % 11)
-            v.digitToChar(16)
+            val checksum = (11 - (sum % 11) % 11)
+            checksum.digitToChar(16)
 
         } else throw IllegalArgumentException()
     }
