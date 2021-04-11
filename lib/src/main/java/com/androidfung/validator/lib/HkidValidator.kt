@@ -2,27 +2,24 @@ package com.androidfung.validator.lib
 
 class HkidValidator {
 
-    fun String.matchesHkidFormat(): Boolean {
-        return this.matches(Regex("[A-Z]{1,2}\\d{6}"))
-    }
+    private val acceptedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+    private val hkidRegex = Regex("[A-Z]{1,2}\\d{6}")
 
+    @ExperimentalStdlibApi
     fun calcCheckDigit(input: String): Char {
-        return if (input.matchesHkidFormat()) {
+        return if (input.matches(hkidRegex)) {
             val id = if (input.length == 7) " $input" else input
             val sum = id.mapIndexed { index, c ->
-                (9 - index) * convertCharToMultiplier(c)
+                (9 - index) * c.toMultiplier()
             }.sum()
 
-            when (val reminder = sum % 11) {
-                0 -> '0'
-                1 -> 'A'
-                else -> '0' + (11 - reminder)
-            }
+            val v = (11 - (sum % 11) % 11)
+            v.digitToChar(16)
+
         } else throw IllegalArgumentException()
     }
 
-    private fun convertCharToMultiplier(c: Char): Int {
-        val m = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
-        return m.indexOf(c, ignoreCase = true)
+    private fun Char.toMultiplier(): Int {
+        return acceptedChars.indexOf(this, ignoreCase = true)
     }
 }
