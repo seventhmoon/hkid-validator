@@ -3,6 +3,7 @@
 This is a Hong Kong ID (HKID) validator design for Android
 
 ### How to install
+[![](https://jitpack.io/v/seventhmoon/hkid-validator.svg)](https://jitpack.io/#seventhmoon/hkid-validator)
 
 To get a Git project into your build:
 
