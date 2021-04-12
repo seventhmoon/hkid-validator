@@ -5,6 +5,15 @@ class HkidValidator {
     private val hkidRegex = Regex("[A-Z]{1,2}\\d{6}")
 
     @ExperimentalStdlibApi
+    fun isValid(id: String, checksum: Char) : Boolean{
+        return try {
+            calcCheckDigit(id) == checksum
+        }catch (e : IllegalArgumentException){
+            false
+        }
+    }
+
+    @ExperimentalStdlibApi
     fun calcCheckDigit(input: String): Char {
         if (input.matches(hkidRegex)) {
             val id = if (input.length == 7) " $input" else input
