@@ -3,7 +3,7 @@ package com.androidfung.validator.lib
 class HkidValidator {
 
     companion object {
-        private val acceptedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+        private const val ACCEPTED_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
         private val hkidRegex = Regex("[A-Z]{1,2}\\d{6}")
 
         @ExperimentalStdlibApi
@@ -20,7 +20,7 @@ class HkidValidator {
             if (input.matches(hkidRegex)) {
                 val id = if (input.length == 7) " $input" else input
                 val sum = id.mapIndexed { index, c ->
-                    (9 - index) * acceptedChars.indexOf(c)
+                    (9 - index) * ACCEPTED_CHARS.indexOf(c)
                 }.sum()
                 val checksum = ((11 - (sum % 11)) % 11)
 
