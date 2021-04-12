@@ -25,5 +25,8 @@ Step 2. Add the dependency
 	}
 	     
 ### How to use
-
-    HkidValidator.calcCheckDigit("A123456") //calculate the check digit in ( )
+    try {
+        HkidValidator.calcCheckDigit("A123456") //calculate the check digit in ( )
+    } catch (e : IllegalArgumentException){
+        // input is not in a valid format
+    }
