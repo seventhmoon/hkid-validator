@@ -21,12 +21,10 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.seventhmoon:hkid-validator:1.0.0'
+	        implementation 'com.github.seventhmoon:hkid-validator:1.0.1'
 	}
 	     
 ### How to use
-    try {
-        HkidValidator.calcCheckDigit("A123456") //calculate the check digit in ( )
-    } catch (e : IllegalArgumentException){
-        // input is not in a valid format
-    }
+    
+    HkidValidator.isValid("A123456",'3') // true, valid
+    HkidValidator.isValid("A123456",'2') // false, invalid
